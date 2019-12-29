@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
 
 class UserController extends Controller
 {
@@ -14,7 +15,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('backend.users.index');
+        // $users = \DB::table('users')->get();
+        
+        $users = User::paginate(15);
+
+        return view('backend.users.index')->with([
+            'users'=>$users
+        ]);
+
     }
 
     /**
@@ -29,7 +37,7 @@ class UserController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     *`
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
