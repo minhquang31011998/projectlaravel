@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Product;
+use App\Image;
 
 class ProductController extends Controller
 {
@@ -81,5 +83,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function showImages($id){
+
+        $product = Product::find($id);
+        $images = $product->images;
+        dd($images);
     }
 }

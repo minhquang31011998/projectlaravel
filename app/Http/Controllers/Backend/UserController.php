@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use App\Userinfo;
+use App\Category;
+use App\Product;
+use App\Order;
+
 
 class UserController extends Controller
 {
@@ -89,5 +94,28 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function test(){
+        // $user = User::find(1);
+
+        // $userInfo = $user->userInfo;
+        // dd($userInfo);
+        // $userInfo = Userinfo::find(1);
+       
+        // $user = $userInfo->user;
+        // dd($user);
+        // $category = Category::find(1);
+        // $products = $category->products;
+        // dd($products);
+        // $product = Product::find(30);
+       
+        // $category = $product->category;
+        // dd($category);
+        // $product = Product::find(30);
+        // $orders = $product->orders;
+        // dd($orders);
+        $order = Order::find(1);
+        $products = $order->products;
+        dd($products);
     }
 }

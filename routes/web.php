@@ -19,10 +19,16 @@ Route::group([
 	Route::group(['prefix' => 'products'], function(){
 		Route::get('/', 'ProductController@index')->name('backend.product.index');
 		Route::get('/create', 'ProductController@create')->name('backend.product.create');
+		Route::get('showImages/{id}','ProductController@showImages');
 	});
 	 //Quản lý người dùng
 	Route::group(['prefix' => 'users'], function(){
 		Route::get('/', 'UserController@index')->name('backend.user.index');
 		Route::get('/create', 'UserController@create')->name('backend.user.create');
+		Route::get('/test', 'UserController@test');
+	});
+	Route::group(['prefix' => 'categories'], function(){
+		
+		Route::get('showProducts/{id}','ProductController@showProducts');
 	});
 });
