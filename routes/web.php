@@ -26,9 +26,14 @@ Route::group([
 		Route::get('/', 'UserController@index')->name('backend.user.index');
 		Route::get('/create', 'UserController@create')->name('backend.user.create');
 		Route::get('/test', 'UserController@test');
+		Route::get('showProducts/{id}','ProductController@showProducts');
 	});
 	Route::group(['prefix' => 'categories'], function(){
 		
-		Route::get('showProducts/{id}','ProductController@showProducts');
+		Route::get('showProducts/{id}','CategoryController@showProducts');
+	});
+	Route::group(['prefix' => 'order'], function(){
+		
+		Route::get('showProducts/{id}','OrderController@showProducts');
 	});
 });

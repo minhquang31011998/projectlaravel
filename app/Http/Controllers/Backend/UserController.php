@@ -118,4 +118,10 @@ class UserController extends Controller
         $products = $order->products;
         dd($products);
     }
+    public function showProducts($id){
+
+        $user = user::find($id);
+        $products = $user->products;
+        dd($products);
+    }
 }
