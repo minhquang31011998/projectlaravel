@@ -13,7 +13,8 @@
 
 Route::group([
 	'namespace' => 'Backend',
-	'prefix' => 'admin'
+	'prefix' => 'admin',
+	'middleware' => 'auth'
 ], function (){
 	Route::get('/dashboard', 'DashboardController@index')->name('backend.dashboard');
 	Route::group(['prefix' => 'products'], function(){
@@ -37,3 +38,10 @@ Route::group([
 		Route::get('showProducts/{id}','OrderController@showProducts');
 	});
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('profile', function () {
+//     //
+// })->middleware('auth');

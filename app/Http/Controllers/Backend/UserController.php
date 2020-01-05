@@ -9,6 +9,7 @@ use App\Userinfo;
 use App\Category;
 use App\Product;
 use App\Order;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserController extends Controller
@@ -18,10 +19,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         // $users = \DB::table('users')->get();
-        
+        $email = Auth::user()->email;
+        dd($email);
         $users = User::paginate(15);
 
         return view('backend.users.index')->with([
@@ -101,14 +107,14 @@ class UserController extends Controller
         // $userInfo = $user->userInfo;
         // dd($userInfo);
         // $userInfo = Userinfo::find(1);
-       
+     
         // $user = $userInfo->user;
         // dd($user);
         // $category = Category::find(1);
         // $products = $category->products;
         // dd($products);
         // $product = Product::find(30);
-       
+     
         // $category = $product->category;
         // dd($category);
         // $product = Product::find(30);
