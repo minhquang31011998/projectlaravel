@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Image;
+use App\Category;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProductController extends Controller
 {
@@ -16,7 +21,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-         return view('backend.products.index');
+        $products = Product::paginate(15);
+        return view('backend.products.index')->with([
+            'products'=>$products
+        ]);
     }
 
     /**
@@ -26,7 +34,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('backend.products.create');
+        $categories = Category::get();
+        return view('backend.products.create')->with([
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -37,8 +48,68 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       if ($request->hasFile('images')){
+            // $path = Storage::putFile('images', $request->file('image'));
+        // $file = $request->file('image');
+// Lưu vào trong thư mục storage
+        // $path = $file->store('images');
+        // $file = $request->file('image');
+        // $name = $file->getClientOriginalName();
+
+        // $file->move('image1', $name);
+         $images = $request->file('images');
+         foreach ($images as $image){
+            // $image->store('image');
+            $name = $image->getClientOriginalName();
+
+            $image->move('image1', $name);
+        }
+    }else{
+        dd('khong co file');
     }
+
+
+        // $validatedData = $request->validate([
+        //     'name'         => 'required|min:10|max:255',
+        //     'origin_price' => 'required|numeric',
+        //     'sale_price'   => 'required|numeric',
+        // ]);
+       //  $validator = \Validator::make($request->all(),
+       //      [
+       //          'name'         => 'required|min:10|max:255',
+       //          'origin_price' => 'required|numeric',
+       //          'sale_price'   => 'required|numeric',
+       //      ],
+       //      [
+       //          'required' => ':attribute Không được để trống',
+       //          'min' => ':attribute Không được nhỏ hơn :min',
+       //          'max' => ':attribute Không được lớn hơn :max'
+       //      ],
+       //      [
+       //          'name' => 'Tên sản phẩm',
+       //          'origin_price' => 'Giá gốc',
+       //          'sale_price' => 'Giá bán'
+       //      ]
+       //  );
+       //  if ($validator->errors()){
+       //      return back()
+       //          ->withErrors($validator)
+       //          ->withInput();
+       //  }
+       // $product = new Product();
+       //  $product->name = $request->get('name');
+       //  $product->slug = \Illuminate\Support\Str::slug($request->get('name'));
+       //  $product->category_id = $request->get('category_id');
+       //  $product->origin_price = $request->get('origin_price');
+       //  $product->sale_price = $request->get('sale_price');
+       //  $product->content = $request->get('content');
+       //  $product->status = $request->get('status');
+       //  $product->user_id = Auth::user()->id;
+       //  $product->save();
+
+       //  return redirect()->route('backend.product.index');
+}
+
 
     /**
      * Display the specified resource.

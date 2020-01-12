@@ -20,9 +20,9 @@ class CreateProductsTable extends Migration
             $table->integer('origin_price');
             $table->integer('sale_price');
             $table->text('content');
-            $table->integer('discount_percent');
-            $table->integer('user_id');
-            $table->string('category_id');
+            $table->integer('discount_percent')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->string('category_id')->nullable();
             $table->integer('status');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();

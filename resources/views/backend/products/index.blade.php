@@ -58,41 +58,23 @@
                                 <th>ID</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Thời gian</th>
-                                <th>Status</th>
+                                
                                 <th>Mô tả</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($products as $product)
                             <tr>
-                                <td>183</td>
-                                <td>John Doe</td>
-                                <td>11-7-2014</td>
+                                <td>{{ $product->id }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->created_at }}</td>
+                                <td>{!! $product->content !!}</td>
                                 <td><span class="tag tag-success">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                             </tr>
-                            <tr>
-                                <td>219</td>
-                                <td>Alexander Pierce</td>
-                                <td>11-7-2014</td>
-                                <td><span class="tag tag-warning">Pending</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>657</td>
-                                <td>Bob Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="tag tag-primary">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>175</td>
-                                <td>Mike Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="tag tag-danger">Denied</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
+                        {!! $products->links() !!}
                     </div>
                     <!-- /.card-body -->
                 </div>

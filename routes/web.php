@@ -20,6 +20,7 @@ Route::group([
 	Route::group(['prefix' => 'products'], function(){
 		Route::get('/', 'ProductController@index')->name('backend.product.index');
 		Route::get('/create', 'ProductController@create')->name('backend.product.create');
+		Route::post('/', 'ProductController@store')->name('backend.product.store');
 		Route::get('showImages/{id}','ProductController@showImages');
 	});
 	 //Quản lý người dùng

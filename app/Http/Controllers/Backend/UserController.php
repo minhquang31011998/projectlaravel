@@ -26,8 +26,8 @@ class UserController extends Controller
     public function index()
     {
         // $users = \DB::table('users')->get();
-        $email = Auth::user()->email;
-        dd($email);
+        // $email = Auth::user()->email;
+        // dd($email);
         $users = User::paginate(15);
 
         return view('backend.users.index')->with([
